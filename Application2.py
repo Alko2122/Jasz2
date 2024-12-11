@@ -105,13 +105,20 @@ elif selection == "Regression Coefficients":
 # Random Forest Feature Importance with feature selection
 elif selection == "RF Feature Importance":
     st.title("Random Forest Feature Importance")
+    
+    # Get the unique SDGs and the first column's data
     available_sdg = feature_importance['SDG'].tolist()
+    available_first_column = feature_importance.iloc[:, 0].tolist()  # First column (dynamic)
     
-    # Multi-select widget for SDG selection
+    # Multi-select widget for SDG and First Column selection
     selected_sdg = st.multiselect("Select SDGs", available_sdg, default=available_sdg)
+    selected_first_column = st.multiselect("Select First Column Data", available_first_column, default=available_first_column)
     
-    # Filter the dataframe to only show selected SDGs
-    filtered_feature_importance = feature_importance[feature_importance['SDG'].isin(selected_sdg)]
+    # Filter the dataframe to show only selected SDGs and first column data
+    filtered_feature_importance = feature_importance[
+        feature_importance['SDG'].isin(selected_sdg) & 
+        feature_importance.iloc[:, 0].isin(selected_first_column)  # Using dynamic column selection
+    ]
     
     # Pivot table for visualization
     pivot_table = filtered_feature_importance.pivot(index='SDG', columns='Target', values='Importance')
@@ -128,5 +135,5 @@ elif selection == "RF Feature Importance":
         ax=ax
     )
     st.pyplot(fig)
-
+    
 st.sidebar.info("Developed for analyzing SDG and HR metrics with Random Forest, Factor Analysis, and Regression.")
