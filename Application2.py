@@ -22,7 +22,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 # %%
 # Load datasets
 sdg_data = pd.read_excel(https://github.com/Alko2122/Jasz2/blob/38edb1d7e6e0b05b559ee2129945439d3422014b/SDGs.xlsx)
-gci_data = pd.read_excel(r"C:\Users\alkoj\OneDrive\Desktop\WEF.xlsx")
+gci_data = pd.read_excel(https://github.com/Alko2122/Jasz2/blob/6e9af0829ba56f2d6da021ff5950ba70072fcef0/WEF.xlsx)
 
 # %% [markdown]
 # # Data Cleaning - GCI Dataset
