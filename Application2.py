@@ -135,6 +135,10 @@ elif selection == "Factor Loading":
     # Filter the dataframe to only show selected features
     filtered_factor_loadings = factor_loadings[factor_loadings.iloc[:, 0].isin(selected_features)]
     
-    st.dataframe(filtered_factor_loadings)
+    # Sort the dataframe by 'Factor Loading' column in descending order
+    filtered_factor_loadings_sorted = filtered_factor_loadings.sort_values(by='Factor Loading', ascending=False)
     
+    # Display the sorted dataframe and bar chart
+    st.dataframe(filtered_factor_loadings_sorted)
+
 st.sidebar.info("Developed for analyzing SDG and HR metrics with Random Forest, Factor Analysis, and Regression.")
