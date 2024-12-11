@@ -654,6 +654,9 @@ factor_loading_df.head()
 # Merge the scaled SDG and GCI datasets
 merged_data = pd.merge(final_sdg_data, gci_data_scaled, on='Country_year', how='inner')
 
+# Save the merged data to an Excel file
+merged_data.to_excel("https://github.com/Alko2122/Jasz2/tree/main",index=False)
+
 # Check the merged data
 print("Merged Data Overview:")
 merged_data.info()
@@ -1283,6 +1286,7 @@ def load_data():
     factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/ResultsSDG_Factor_Loadings.xlsx")
     regression_coefficients = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Linear_Regression_Coefficients_SDG.xlsx")
     feature_importance = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Feature_Importances.xlsx")
+    merged_data = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/Merged_Data_SDG_GCI.xlsx")
     return factor_loadings, regression_coefficients, feature_importance, merged_data
 
 # Load data
