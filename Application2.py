@@ -21,7 +21,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # %%
 # Load datasets
-sdg_data = pd.read_excel(r"C:\Users\alkoj\OneDrive\Desktop\SDGs.xlsx")
+sdg_data = pd.read_excel(https://github.com/Alko2122/Jasz2/blob/38edb1d7e6e0b05b559ee2129945439d3422014b/SDGs.xlsx)
 gci_data = pd.read_excel(r"C:\Users\alkoj\OneDrive\Desktop\WEF.xlsx")
 
 # %% [markdown]
