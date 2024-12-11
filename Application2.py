@@ -3,21 +3,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
-import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import re
-import math
-from sentence_transformers import SentenceTransformer, util
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from pandas.io.formats.excel import ExcelFormatter
-from statsmodels.tsa.holtwinters import ExponentialSmoothing
-from sklearn.decomposition import FactorAnalysis
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 def load_data():
     # Replace these file paths with the actual locations of your outputs
