@@ -6,3 +6,4 @@ numpy
 scikit-learn
 statsmodels
 sentence-transformers
+openpyxl
