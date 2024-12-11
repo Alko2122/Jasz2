@@ -47,27 +47,13 @@ factor_loadings, regression_coefficients, feature_importance, merged_data = load
 if factor_loadings is None:
     st.stop()  # Stop the app if data loading fails
 
-# Sidebar Navigation
+# Sidebar Navigation (reordered)
 st.sidebar.title("Navigation")
-options = ["Factor Loading", "EDA - Correlation Matrix", "Regression Coefficients", "RF Feature Importance"]
+options = ["EDA - Correlation Matrix", "RF Feature Importance", "Regression Coefficients", "Factor Loading"]
 selection = st.sidebar.radio("Choose an option", options)
 
-# Factor Loading Display with feature selection
-if selection == "Factor Loading":
-    st.title("Factor Loadings")
-    available_features = factor_loadings['Variable'].tolist()
-    
-    # Multi-select widget for feature selection
-    selected_features = st.multiselect("Select Variables", available_features, default=available_features)
-    
-    # Filter the dataframe to only show selected features
-    filtered_factor_loadings = factor_loadings[factor_loadings['Variable'].isin(selected_features)]
-    
-    st.dataframe(filtered_factor_loadings)
-    st.bar_chart(filtered_factor_loadings.set_index('Variable')['Factor Loading'])
-
-# Correlation Matrix (EDA) with feature selection
-elif selection == "EDA - Correlation Matrix":
+# Correlation Matrix (EDA)
+if selection == "EDA - Correlation Matrix":
     st.title("Correlation Matrix")
     st.write("Visualizing the correlation matrix of the merged dataset.")
     
@@ -87,20 +73,6 @@ elif selection == "EDA - Correlation Matrix":
     fig, ax = plt.subplots(figsize=(12, 10))
     sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
     st.pyplot(fig)
-
-# Regression Coefficients Display with feature selection
-elif selection == "Regression Coefficients":
-    st.title("Regression Coefficients")
-    available_features = regression_coefficients['Feature'].tolist()
-    
-    # Multi-select widget for feature selection
-    selected_features = st.multiselect("Select Features", available_features, default=available_features)
-    
-    # Filter the dataframe to only show selected features
-    filtered_regression_coefficients = regression_coefficients[regression_coefficients['Feature'].isin(selected_features)]
-    
-    st.dataframe(filtered_regression_coefficients)
-    st.bar_chart(filtered_regression_coefficients.set_index('Feature')['Coefficient'])
 
 # Random Forest Feature Importance with feature selection
 elif selection == "RF Feature Importance":
@@ -135,5 +107,33 @@ elif selection == "RF Feature Importance":
         ax=ax
     )
     st.pyplot(fig)
+
+# Regression Coefficients Display with feature selection
+elif selection == "Regression Coefficients":
+    st.title("Regression Coefficients")
+    available_features = regression_coefficients['Feature'].tolist()
     
+    # Multi-select widget for feature selection
+    selected_features = st.multiselect("Select Features", available_features, default=available_features)
+    
+    # Filter the dataframe to only show selected features
+    filtered_regression_coefficients = regression_coefficients[regression_coefficients['Feature'].isin(selected_features)]
+    
+    st.dataframe(filtered_regression_coefficients)
+    st.bar_chart(filtered_regression_coefficients.set_index('Feature')['Coefficient'])
+
+# Factor Loading Display with feature selection
+elif selection == "Factor Loading":
+    st.title("Factor Loadings")
+    available_features = factor_loadings['Variable'].tolist()
+    
+    # Multi-select widget for feature selection
+    selected_features = st.multiselect("Select Variables", available_features, default=available_features)
+    
+    # Filter the dataframe to only show selected features
+    filtered_factor_loadings = factor_loadings[factor_loadings['Variable'].isin(selected_features)]
+    
+    st.dataframe(filtered_factor_loadings)
+    st.bar_chart(filtered_factor_loadings.set_index('Variable')['Factor Loading'])
+
 st.sidebar.info("Developed for analyzing SDG and HR metrics with Random Forest, Factor Analysis, and Regression.")
