@@ -643,7 +643,7 @@ for sdg, result in factor_loading_results.items():
 factor_loading_df = pd.DataFrame(factor_loading_df)
 
 # Save to Excel
-factor_loading_df.to_excel(r"C:\Users\alkoj\OneDrive\Desktop\Jas2\ResultsSDG_Factor_Loadings.xlsx", index=False)
+factor_loading_df.to_excel("https://github.com/Alko2122/Jasz2/tree/main/ResultsSDG_Factor_Loadings.xlsx", index=False)
 
 # Print a preview of the factor loadings DataFrame
 print("\nFactor Loadings Data (saved to 'SDG_Factor_Loadings.xlsx'):")
@@ -1280,7 +1280,7 @@ print("\nFeature importance heatmap saved to 'Feature_Importance_Heatmap.xlsx'."
 @st.cache_data
 def load_data():
     # Replace these file paths with the actual locations of your outputs
-    factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/mainResultsSDG_Factor_Loadings.xlsx")
+    factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/ResultsSDG_Factor_Loadings.xlsx")
     regression_coefficients = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Linear_Regression_Coefficients_SDG.xlsx")
     feature_importance = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Feature_Importances.xlsx")
     return factor_loadings, regression_coefficients, feature_importance, merged_data
