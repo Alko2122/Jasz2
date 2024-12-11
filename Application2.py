@@ -52,13 +52,21 @@ st.sidebar.title("Navigation")
 options = ["Factor Loading", "EDA - Correlation Matrix", "Regression Coefficients", "RF Feature Importance"]
 selection = st.sidebar.radio("Choose an option", options)
 
-# Factor Loading Display
+# Factor Loading Display with feature selection
 if selection == "Factor Loading":
     st.title("Factor Loadings")
-    st.dataframe(factor_loadings)
-    st.bar_chart(factor_loadings.set_index('Variable')['Factor Loading'])
+    available_features = factor_loadings['Variable'].tolist()
+    
+    # Multi-select widget for feature selection
+    selected_features = st.multiselect("Select Variables", available_features, default=available_features)
+    
+    # Filter the dataframe to only show selected features
+    filtered_factor_loadings = factor_loadings[factor_loadings['Variable'].isin(selected_features)]
+    
+    st.dataframe(filtered_factor_loadings)
+    st.bar_chart(filtered_factor_loadings.set_index('Variable')['Factor Loading'])
 
-# Correlation Matrix (EDA)
+# Correlation Matrix (EDA) with feature selection
 elif selection == "EDA - Correlation Matrix":
     st.title("Correlation Matrix")
     st.write("Visualizing the correlation matrix of the merged dataset.")
@@ -67,27 +75,46 @@ elif selection == "EDA - Correlation Matrix":
     columns_to_exclude = ['Time', 'year']
     filtered_data = merged_data.drop(columns=columns_to_exclude, errors='ignore')
     
+    # Multi-select widget for numeric column selection
+    available_columns = filtered_data.select_dtypes(include=[np.number]).columns.tolist()
+    selected_columns = st.multiselect("Select Numeric Columns", available_columns, default=available_columns)
+    
     # Select numeric columns
-    numeric_columns = filtered_data.select_dtypes(include=[np.number])
+    numeric_columns = filtered_data[selected_columns]
     corr_matrix = numeric_columns.corr()
 
     # Heatmap
     fig, ax = plt.subplots(figsize=(12, 10))
-    sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', ax=ax)
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
     st.pyplot(fig)
 
-# Regression Coefficients Display
+# Regression Coefficients Display with feature selection
 elif selection == "Regression Coefficients":
     st.title("Regression Coefficients")
-    st.dataframe(regression_coefficients)
-    st.bar_chart(regression_coefficients.set_index('Feature')['Coefficient'])
+    available_features = regression_coefficients['Feature'].tolist()
+    
+    # Multi-select widget for feature selection
+    selected_features = st.multiselect("Select Features", available_features, default=available_features)
+    
+    # Filter the dataframe to only show selected features
+    filtered_regression_coefficients = regression_coefficients[regression_coefficients['Feature'].isin(selected_features)]
+    
+    st.dataframe(filtered_regression_coefficients)
+    st.bar_chart(filtered_regression_coefficients.set_index('Feature')['Coefficient'])
 
-# Random Forest Feature Importance
+# Random Forest Feature Importance with feature selection
 elif selection == "RF Feature Importance":
     st.title("Random Forest Feature Importance")
-    st.dataframe(feature_importance)
+    available_sdg = feature_importance['SDG'].tolist()
     
-    pivot_table = feature_importance.pivot(index='SDG', columns='Target', values='Importance')
+    # Multi-select widget for SDG selection
+    selected_sdg = st.multiselect("Select SDGs", available_sdg, default=available_sdg)
+    
+    # Filter the dataframe to only show selected SDGs
+    filtered_feature_importance = feature_importance[feature_importance['SDG'].isin(selected_sdg)]
+    
+    # Pivot table for visualization
+    pivot_table = filtered_feature_importance.pivot(index='SDG', columns='Target', values='Importance')
     
     # Heatmap
     fig, ax = plt.subplots(figsize=(12, 8))
