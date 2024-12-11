@@ -1,0 +1,10 @@
+streamlit
+pandas
+seaborn
+matplotlib
+numpy
+scikit-learn
+statsmodels
+sentence-transformers
+openpyxl
+requests
