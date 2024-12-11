@@ -1128,7 +1128,7 @@ print("\nLinear Regression Coefficients Summary:")
 print(coefficients_df)
 
 # Optionally, save the coefficients to an Excel file
-coefficients_df.to_excel(r"C:\Users\alkoj\OneDrive\Desktop\Jas2\Linear_Regression_Coefficients_SDG.xlsx", sheet_name="Coefficients", index=False)
+coefficients_df.to_excel("https://github.com/Alko2122/Jasz2/tree/main/Linear_Regression_Coefficients_SDG.xlsx", sheet_name="Coefficients", index=False)
 
 # %%
 # Assuming ⁠ results_df ⁠ contains the model evaluation results as shown
@@ -1240,7 +1240,7 @@ for target in dependent_vars:
 feature_importance_df = pd.DataFrame(feature_importance_results)
 
 # Save to Excel
-feature_importance_df.to_excel(r"C:\Users\alkoj\OneDrive\Desktop\Jas2\Feature_Importances.xlsx", sheet_name="Feature Importance", index=False)
+feature_importance_df.to_excel("https://github.com/Alko2122/Jasz2/tree/main/Feature_Importances.xlsx", sheet_name="Feature Importance", index=False)
 
 print("\nFeature importance saved to 'Feature_Importances.xlsx'.")
 
@@ -1280,9 +1280,9 @@ print("\nFeature importance heatmap saved to 'Feature_Importance_Heatmap.xlsx'."
 @st.cache_data
 def load_data():
     # Replace these file paths with the actual locations of your outputs
-    factor_loadings = pd.read_excel(r"C:\Users\alkoj\OneDrive\Desktop\Jas2\ResultsSDG_Factor_Loadings.xlsx")
-    regression_coefficients = pd.read_excel(r"C:\Users\alkoj\OneDrive\Desktop\Jas2\Linear_Regression_Coefficients_SDG.xlsx")
-    feature_importance = pd.read_excel(r"C:\Users\alkoj\OneDrive\Desktop\Jas2\Feature_Importances.xlsx")
+    factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/mainResultsSDG_Factor_Loadings.xlsx")
+    regression_coefficients = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Linear_Regression_Coefficients_SDG.xlsx")
+    feature_importance = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Feature_Importances.xlsx")
     return factor_loadings, regression_coefficients, feature_importance, merged_data
 
 # Load data
