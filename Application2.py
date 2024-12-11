@@ -122,18 +122,20 @@ elif selection == "Regression Coefficients":
     st.dataframe(filtered_regression_coefficients)
     st.bar_chart(filtered_regression_coefficients.set_index('Feature')['Coefficient'])
 
-# Factor Loading Display with feature selection
+# Factor Loading Display with feature selection (unique first column values)
 elif selection == "Factor Loading":
     st.title("Factor Loadings")
-    available_features = factor_loadings['Variable'].tolist()
     
-    # Multi-select widget for feature selection
+    # Get unique values from the first column (Variable column)
+    available_features = factor_loadings.iloc[:, 0].unique().tolist()  # Using first column
+    
+    # Multi-select widget for unique feature selection from the first column
     selected_features = st.multiselect("Select Variables", available_features, default=available_features)
     
     # Filter the dataframe to only show selected features
-    filtered_factor_loadings = factor_loadings[factor_loadings['Variable'].isin(selected_features)]
+    filtered_factor_loadings = factor_loadings[factor_loadings.iloc[:, 0].isin(selected_features)]
     
     st.dataframe(filtered_factor_loadings)
-    st.bar_chart(filtered_factor_loadings.set_index('Variable')['Factor Loading'])
-
+    st.bar_chart(filtered_factor_loadings.set_index(factor_loadings.columns[0])['Factor Loading'])  # Set first column as index for better visualization
+    
 st.sidebar.info("Developed for analyzing SDG and HR metrics with Random Forest, Factor Analysis, and Regression.")
