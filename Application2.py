@@ -21,10 +21,10 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 def load_data():
     # Replace these file paths with the actual locations of your outputs
-    factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/ResultsSDG_Factor_Loadings.xlsx")
-    regression_coefficients = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Linear_Regression_Coefficients_SDG.xlsx")
-    feature_importance = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/main/Feature_Importances.xlsx")
-    merged_data = pd.read_excel("https://github.com/Alko2122/Jasz2/tree/Merged_Data_SDG_GCI.xlsx")
+    factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/ResultsSDG_Factor_Loadings.xlsx")
+    regression_coefficients = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Linear_Regression_Coefficients_SDG.xlsx")
+    feature_importance = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Feature_Importances.xlsx")
+    merged_data = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Merged_Data_SDG_GCI.xlsx")
     return factor_loadings, regression_coefficients, feature_importance, merged_data
 
 # Load data
