@@ -120,7 +120,6 @@ elif selection == "Regression Coefficients":
     filtered_regression_coefficients = regression_coefficients[regression_coefficients['Feature'].isin(selected_features)]
     
     st.dataframe(filtered_regression_coefficients)
-    st.bar_chart(filtered_regression_coefficients.set_index('Feature')['Coefficient'])
 
 # Factor Loading Display with feature selection (unique first column values)
 elif selection == "Factor Loading":
