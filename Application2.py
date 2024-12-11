@@ -136,6 +136,5 @@ elif selection == "Factor Loading":
     filtered_factor_loadings = factor_loadings[factor_loadings.iloc[:, 0].isin(selected_features)]
     
     st.dataframe(filtered_factor_loadings)
-    st.bar_chart(filtered_factor_loadings.set_index(factor_loadings.columns[0])['Factor Loading'])  # Set first column as index for better visualization
     
 st.sidebar.info("Developed for analyzing SDG and HR metrics with Random Forest, Factor Analysis, and Regression.")
