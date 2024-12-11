@@ -106,9 +106,9 @@ elif selection == "Regression Coefficients":
 elif selection == "RF Feature Importance":
     st.title("Random Forest Feature Importance")
     
-    # Get the unique SDGs and the first column's data
-    available_sdg = feature_importance['SDG'].tolist()
-    available_first_column = feature_importance.iloc[:, 0].tolist()  # First column (dynamic)
+    # Get the unique SDGs and the unique first column's data
+    available_sdg = feature_importance['SDG'].unique().tolist()  # Get unique SDGs
+    available_first_column = feature_importance.iloc[:, 0].unique().tolist()  # First column data (unique)
     
     # Multi-select widget for SDG and First Column selection
     selected_sdg = st.multiselect("Select SDGs", available_sdg, default=available_sdg)
