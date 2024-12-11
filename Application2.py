@@ -5,16 +5,47 @@ import matplotlib.pyplot as plt
 import numpy as np
 import requests
 
+# Function to download the file and load it with pandas
+def download_file(url, local_filename):
+    # Send GET request to GitHub raw URL
+    r = requests.get(url)
+    r.raise_for_status()  # Will raise an error if the download fails
+    with open(local_filename, 'wb') as f:
+        f.write(r.content)
+
 def load_data():
-    # Replace these file paths with the actual locations of your outputs
-    factor_loadings = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/ResultsSDG_Factor_Loadings.xlsx")
-    regression_coefficients = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Linear_Regression_Coefficients_SDG.xlsx")
-    feature_importance = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Feature_Importances.xlsx")
-    merged_data = pd.read_excel("https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Merged_Data_SDG_GCI.xlsx")
-    return factor_loadings, regression_coefficients, feature_importance, merged_data
+    try:
+        # URLs for Excel files
+        file_urls = {
+            "factor_loadings": "https://github.com/Alko2122/Jasz2/raw/refs/heads/main/ResultsSDG_Factor_Loadings.xlsx",
+            "regression_coefficients": "https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Linear_Regression_Coefficients_SDG.xlsx",
+            "feature_importance": "https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Feature_Importances.xlsx",
+            "merged_data": "https://github.com/Alko2122/Jasz2/raw/refs/heads/main/Merged_Data_SDG_GCI.xlsx"
+        }
+
+        # Download files locally
+        download_file(file_urls["factor_loadings"], "ResultsSDG_Factor_Loadings.xlsx")
+        download_file(file_urls["regression_coefficients"], "Linear_Regression_Coefficients_SDG.xlsx")
+        download_file(file_urls["feature_importance"], "Feature_Importances.xlsx")
+        download_file(file_urls["merged_data"], "Merged_Data_SDG_GCI.xlsx")
+
+        # Now, load the downloaded files
+        factor_loadings = pd.read_excel("ResultsSDG_Factor_Loadings.xlsx")
+        regression_coefficients = pd.read_excel("Linear_Regression_Coefficients_SDG.xlsx")
+        feature_importance = pd.read_excel("Feature_Importances.xlsx")
+        merged_data = pd.read_excel("Merged_Data_SDG_GCI.xlsx")
+
+        return factor_loadings, regression_coefficients, feature_importance, merged_data
+    except Exception as e:
+        st.error(f"Error downloading or loading data: {e}")
+        return None, None, None, None
 
 # Load data
 factor_loadings, regression_coefficients, feature_importance, merged_data = load_data()
+
+# Check if data was loaded successfully
+if factor_loadings is None:
+    st.stop()  # Stop the app if data loading fails
 
 # Sidebar Navigation
 st.sidebar.title("Navigation")
