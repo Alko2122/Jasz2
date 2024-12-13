@@ -71,7 +71,7 @@ if selection == "EDA - Correlation Matrix":
 
     # Heatmap
     fig, ax = plt.subplots(figsize=(12, 10))
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+    sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', ax=ax)
     st.pyplot(fig)
 
 # Random Forest Feature Importance with feature selection
